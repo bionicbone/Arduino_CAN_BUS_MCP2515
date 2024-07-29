@@ -28,6 +28,13 @@
 
 #define MAX_CHAR_IN_MESSAGE 8
 
+#define MCP_8MHz_125kBPS_CFG1 (0x81)   /* Increased SJW       */
+#define MCP_8MHz_125kBPS_CFG2 (0xE5)   /* Enabled SAM bit     */
+#define MCP_8MHz_125kBPS_CFG3 (0x83)   /* Sample point at 75% */
+
+// Uncomment to use the HSPI bus instead
+//#define SPI_USE_HSPI
+
 class MCP_CAN
 {
     private:
@@ -98,6 +105,7 @@ private:
 public:
     MCP_CAN(byte _CS);
     byte begin(byte speedset);                                      // init can
+    byte begin(byte _SCLK, byte _MISO, byte _MOSI, byte _CS, byte speedset);
     byte init_Mask(byte num, byte ext, unsigned long ulData);       // init Masks
     byte init_Filt(byte num, byte ext, unsigned long ulData);       // init filters
     byte sendMsgBuf(unsigned long id, byte ext, byte rtr, byte len, byte *buf);     // send buf

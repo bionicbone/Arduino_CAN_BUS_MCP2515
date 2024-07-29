@@ -43,6 +43,11 @@
 */
 #include "mcp_canbus.h"
 
+#if defined SPI_USE_HSPI
+SPIClass hspi(HSPI);
+#define SPI hspi
+#endif
+
 #define spi_readwrite   SPI.transfer
 #define spi_read()      spi_readwrite(0x00)
 #define SPI_BEGIN()     SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0))
@@ -616,6 +621,22 @@ byte MCP_CAN::begin(byte speedset)
     byte res = mcp2515_init(speedset);
     return ((res == MCP2515_OK) ? CAN_OK : CAN_FAILINIT);
 }
+
+
+/*********************************************************************************************************
+** Function name:           init
+** Descriptions:            init can and set speed
+*********************************************************************************************************/
+byte MCP_CAN::begin(byte _SCLK, byte _MISO, byte _MOSI, byte _CS, byte speedset)
+{
+  SPICS = _CS;
+  pinMode(SPICS, OUTPUT);
+  MCP2515_UNSELECT();
+  SPI.begin(_SCLK, _MISO, _MOSI, _CS);
+  byte res = mcp2515_init(speedset);
+  return ((res == MCP2515_OK) ? CAN_OK : CAN_FAILINIT);
+}
+
 
 /*********************************************************************************************************
 ** Function name:           init_Mask
