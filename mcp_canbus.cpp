@@ -306,9 +306,12 @@ byte MCP_CAN::mcp2515_configRate(const byte canSpeed)
         break;
 
         case (CAN_125KBPS):
-        cfg1 = MCP_16MHz_125kBPS_CFG1;
-        cfg2 = MCP_16MHz_125kBPS_CFG2;
-        cfg3 = MCP_16MHz_125kBPS_CFG3;
+        //cfg1 = MCP_16MHz_125kBPS_CFG1; 
+        //cfg2 = MCP_16MHz_125kBPS_CFG2;
+        //cfg3 = MCP_16MHz_125kBPS_CFG3;
+        cfg1 = MCP_8MHz_125kBPS_CFG1;
+        cfg2 = MCP_8MHz_125kBPS_CFG2;
+        cfg3 = MCP_8MHz_125kBPS_CFG3;
         break;
 
         case (CAN_200KBPS):
@@ -324,9 +327,13 @@ byte MCP_CAN::mcp2515_configRate(const byte canSpeed)
         break;
 
         case (CAN_500KBPS):
-        cfg1 = MCP_16MHz_500kBPS_CFG1;
-        cfg2 = MCP_16MHz_500kBPS_CFG2;
-        cfg3 = MCP_16MHz_500kBPS_CFG3;
+        //cfg1 = MCP_16MHz_500kBPS_CFG1;
+        //cfg2 = MCP_16MHz_500kBPS_CFG2;
+        //cfg3 = MCP_16MHz_500kBPS_CFG3;
+        cfg1 = MCP_8MHz_500kBPS_CFG1;
+        cfg2 = MCP_8MHz_500kBPS_CFG2;
+        cfg3 = MCP_8MHz_500kBPS_CFG3;
+
         break;
 
         case (CAN_666KBPS):

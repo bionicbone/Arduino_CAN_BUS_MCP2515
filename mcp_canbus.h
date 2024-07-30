@@ -26,11 +26,17 @@
 
 #include "mcp_can_dfs.h"
 
-#define MAX_CHAR_IN_MESSAGE 8
+#define MAX_CHAR_IN_MESSAGE 8 
+
+// TODO - Add correct solution to my fork and create a pull request 
 
 #define MCP_8MHz_125kBPS_CFG1 (0x81)   /* Increased SJW       */
 #define MCP_8MHz_125kBPS_CFG2 (0xE5)   /* Enabled SAM bit     */
 #define MCP_8MHz_125kBPS_CFG3 (0x83)   /* Sample point at 75% */
+
+#define MCP_8MHz_500kBPS_CFG1 (0x00)
+#define MCP_8MHz_500kBPS_CFG2 (0xD1)   /* Enabled SAM bit     */
+#define MCP_8MHz_500kBPS_CFG3 (0x81)   /* Sample point at 75% */
 
 // Uncomment to use the HSPI bus instead
 //#define SPI_USE_HSPI
