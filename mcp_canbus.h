@@ -110,8 +110,8 @@ private:
 
 public:
     MCP_CAN(byte _CS);
-    byte begin(byte speedset);                                                  // init can
-    byte begin(byte _SCLK, byte _MISO, byte _MOSI, byte _CS, byte speedset);
+    byte begin(byte speedset);                                                  // init can with default MCU SPI pins
+    byte begin(byte _SCLK, byte _MISO, byte _MOSI, byte _CS, byte speedset);    // init can with supplied SPI pins
     byte init_Mask(byte num, byte ext, unsigned long ulData);                   // init Masks
     byte init_Filt(byte num, byte ext, unsigned long ulData);                   // init filters
     byte setMode(byte opMode);                                                  // Set operational mode
@@ -121,6 +121,8 @@ public:
     byte readMsgBufID(unsigned long *ID, byte *len, byte *buf);                 // read buf with object ID
     byte checkReceive(void);                                                    // if something received
     byte checkError(void);                                                      // if something error
+    byte enOneShotTX(void);                                                     // Enable one-shot transmission
+    byte disOneShotTX(void);                                                    // Disable one-shot transmission
     unsigned long getCanId(void);                                               // get can id when receive
     byte isRemoteRequest(void);                                                 // get RR flag when receive
     byte isExtendedFrame(void);                                                 // did we recieve 29bit frame?

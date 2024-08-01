@@ -20,6 +20,7 @@
   Btetz
   Hurvajs
   xboxpro1
+  bionicbone
 
   The MIT License (MIT)
 
@@ -975,6 +976,34 @@ byte MCP_CAN::checkError(void)
     byte eflg = mcp2515_readRegister(MCP_EFLG);
     return ((eflg & MCP_EFLG_ERRORMASK) ? CAN_CTRLERROR : CAN_OK);
 }
+
+
+/*********************************************************************************************************
+** Function name:           mcp2515_enOneShotTX
+** Descriptions:            Enables one shot transmission mode
+*********************************************************************************************************/
+byte MCP_CAN::enOneShotTX(void)
+{
+  mcp2515_modifyRegister(MCP_CANCTRL, MODE_ONESHOT, MODE_ONESHOT);
+  if ((mcp2515_readRegister(MCP_CANCTRL) & MODE_ONESHOT) != MODE_ONESHOT)
+    return CAN_FAIL;
+  else
+    return CAN_OK;
+}
+
+/*********************************************************************************************************
+** Function name:           mcp2515_disOneShotTX
+** Descriptions:            Disables one shot transmission mode
+*********************************************************************************************************/
+byte MCP_CAN::disOneShotTX(void)
+{
+  mcp2515_modifyRegister(MCP_CANCTRL, MODE_ONESHOT, 0);
+  if ((mcp2515_readRegister(MCP_CANCTRL) & MODE_ONESHOT) != 0)
+    return CAN_FAIL;
+  else
+    return CAN_OK;
+}
+
 
 /*********************************************************************************************************
 ** Function name:           getCanId
